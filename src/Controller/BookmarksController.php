@@ -44,7 +44,7 @@ class BookmarksController extends AppController
     /**
      * Add method
      *
-     * @return void Redirects on successful add, renders view otherwise.
+     * @return mixed Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
