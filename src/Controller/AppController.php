@@ -30,7 +30,8 @@ class AppController extends Controller
     /**
      * Initialization hook method.
      *
-     * Use this method to add common initialization code like loading components.
+     * Use this method to add common initialization code like loading
+     * components.
      *
      * @return void
      */
