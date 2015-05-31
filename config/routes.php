@@ -47,19 +47,29 @@ Router::scope('/', function ($routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect(
+        '/', ['controller' => 'Pages', 'action' => 'display', 'home']
+    );
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $routes->connect(
+        '/pages/*', ['controller' => 'Pages', 'action' => 'display']
+    );
 
     /**
      * Connect catchall routes for all controllers.
      *
-     * Using the argument `InflectedRoute`, the `fallbacks` method is a shortcut for
-     *    `$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);`
-     *    `$routes->connect('/:controller/:action/*', [], ['routeClass' => 'InflectedRoute']);`
+     * Using the argument `InflectedRoute`, the `fallbacks` method is
+     * a shortcut for
+     *    `$routes->connect(
+     *         '/:controller',
+     *         ['action' => 'index'], ['routeClass' => 'InflectedRoute']
+     *     );`
+     *    `$routes->connect(
+     *         '/:controller/:action/*', [], ['routeClass' => 'InflectedRoute']
+     *     );`
      *
      * Any route class can be used with this method, such as:
      * - DashedRoute
