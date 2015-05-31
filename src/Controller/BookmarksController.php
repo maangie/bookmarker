@@ -50,12 +50,17 @@ class BookmarksController extends AppController
     {
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity(
+                $bookmark, $this->request->data
+            );
+
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
+                $this->Flash->error(
+                    __('The bookmark could not be saved. Please, try again.')
+                );
             }
         }
         $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
@@ -77,12 +82,16 @@ class BookmarksController extends AppController
             'contain' => ['Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark = $this->Bookmarks->patchEntity(
+                $bookmark, $this->request->data
+            );
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
+                $this->Flash->error(
+                    __('The bookmark could not be saved. Please, try again.')
+                );
             }
         }
         $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
@@ -105,7 +114,9 @@ class BookmarksController extends AppController
         if ($this->Bookmarks->delete($bookmark)) {
             $this->Flash->success(__('The bookmark has been deleted.'));
         } else {
-            $this->Flash->error(__('The bookmark could not be deleted. Please, try again.'));
+            $this->Flash->error(
+                __('The bookmark could not be deleted. Please, try again.')
+            );
         }
         return $this->redirect(['action' => 'index']);
     }
