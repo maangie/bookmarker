@@ -12,7 +12,7 @@ class UsersController extends AppController
 {
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['add']);
+        $this->Auth->allow(['add', 'logout']);
     }
 
     /**
@@ -49,6 +49,8 @@ class UsersController extends AppController
      */
     public function add()
     {
+        \Cake\Error\Debugger::log('add');
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
