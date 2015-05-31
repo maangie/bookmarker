@@ -54,19 +54,19 @@ class BookmarksController extends AppController
                 $bookmark, $this->request->data
             );
 
+            $bookmark->user_id = $this->Auth->user('id');
+
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(
-                    __('The bookmark could not be saved. Please, try again.')
-                );
             }
+
+            $this->Flash->error(__(
+                'The bookmark could not be saved. Please, try again.'
+            ));
         }
-        $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
-        $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
-        $this->set(compact('bookmark', 'users', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $tags = $this->Bookmarks->Tags->find('list');
+        $this->set(compact('bookmark', 'tags'));
     }
 
     /**
@@ -85,19 +85,17 @@ class BookmarksController extends AppController
             $bookmark = $this->Bookmarks->patchEntity(
                 $bookmark, $this->request->data
             );
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(
-                    __('The bookmark could not be saved. Please, try again.')
-                );
             }
+            $this->Flash->error(__(
+                'The bookmark could not be saved. Please, try again.'
+            ));
         }
-        $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
         $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
-        $this->set(compact('bookmark', 'users', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->set(compact('bookmark', 'tags'));
     }
 
     /**
