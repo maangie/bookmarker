@@ -21,6 +21,14 @@
 use Cake\Core\Plugin;
 use Cake\Routing\Router;
 
+Router::scope(
+    '/bookmarks',
+    ['controller' => 'Bookmarks'],
+    function ($routes) {
+        $routes->connect('/tagged/*', ['action' => 'tags']);
+    }
+);
+
 /**
  * The default class to use for all routes
  *
