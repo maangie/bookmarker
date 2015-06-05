@@ -1,0 +1,14 @@
+db:
+  default: &default
+    adapter:  mysql2
+    host:     localhost
+    username: cakephp
+    password: password
+    database: nagata_cake_bookmarks
+    socket:   /Applications/MAMP/tmp/mysql/mysql.sock
+
+  production:
+    <<: *default
+
+  development:
+    <<: *default
