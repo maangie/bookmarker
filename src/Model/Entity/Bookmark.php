@@ -8,7 +8,6 @@ use Cake\ORM\Entity;
  */
 class Bookmark extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
