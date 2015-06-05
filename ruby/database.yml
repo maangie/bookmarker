@@ -6,7 +6,7 @@ db:
     password: password
     database: nagata_cake_bookmarks
     socket:   /Applications/MAMP/tmp/mysql/mysql.sock
-  
+
   production:
     <<: *default
 
