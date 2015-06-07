@@ -61,6 +61,14 @@ class BookmarksTable extends Table
         return $validator;
     }
 
+    public function beforeSave($event, $entity, $options) {
+        debug($entity);
+        if ($entity->tag_string) {
+            $a = $this->_buildTags($entity->tag_string);
+            $entitiy->tags = $a;
+        }
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -91,5 +99,28 @@ class BookmarksTable extends Table
                             ]);
                         }
                     );
+    }
+
+    protected function _buildTags($tagString) {
+        $new = array_unique(array_map('trim', explode(',', $tagString)));
+        $out = [];
+        $query = $this->Tags->find()->where(['Tags.title IN' => $new]);
+
+        // Remove existing tags from the list of new tags.
+        foreach ($query->extract('title') as $existing) {
+            $index = array_search($existing, $new);
+            if ($index !== false) {
+                unset($new[$index]);
+            }
+        }
+
+        foreach ($query as $tag) { $out[] = $tag; } // Add existing tags.
+
+        // Add new tags.
+        foreach ($new as $tag) {
+            $out[] = $this->Tags->newEntity(['title' => $tag]);
+        }
+
+        return $out;
     }
 }
