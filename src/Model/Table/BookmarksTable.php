@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  */
 class BookmarksTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -25,14 +24,16 @@ class BookmarksTable extends Table
         $this->displayField('title');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'joinType'   => 'INNER'
         ]);
+
         $this->belongsToMany('Tags', [
-            'foreignKey' => 'bookmark_id',
+            'foreignKey'       => 'bookmark_id',
             'targetForeignKey' => 'tag_id',
-            'joinTable' => 'bookmarks_tags'
+            'joinTable'        => 'bookmarks_tags'
         ]);
     }
 
@@ -80,6 +81,7 @@ class BookmarksTable extends Table
             'Bookmarks.title',
             'Bookmarks.url',
         ];
+
         return $this->find()
                     ->distinct($fields)
                     ->matching(
